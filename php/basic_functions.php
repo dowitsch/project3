@@ -1,26 +1,26 @@
 <?php
 /**
- *  @autor Michael Abplanalp
+ *  @autor Daniel Mosimann
  *  @version 2.0
  *
- *  Dieses Modul stellt grundlegende Funktionen zur Verf√ºgung und ist damit
+ *  Dieses Modul stellt grundlegende Funktionen zur Verf¸gung und ist damit
  *  Bestandteil des MVC-GIBS.
  *
  */
 
 /*
- * Assoziativer, globaler Array f√ºr den Transport von Werten zwischen Anwendung und Templates
+ * Assoziativer, globaler Array f¸r den Transport von Werten zwischen Anwendung und Templates
  */
-//$params = array();
+$params = array();
 
 /**
- * F√ºhrt ein HTML-Template aus und gibt das Produkt zur√ºck.
+ * F¸hrt ein HTML-Template aus und gibt das Produkt zur¸ck.
  *
  * @param     $template     Filename des Templates
- * @param     $params       Assoziativer Array mit Werten, welche im Template eingef√ºgt werden.
+ * @param     $params       Assoziativer Array mit Werten, welche im Template eingef¸gt werden.
  *                          key: Name der Variable, value: Wert
  */
-function runTemplate($template) {
+function runTemplate( $template ) {
 	ob_start();
 	include($template);
 	$inhalt=ob_get_contents();
@@ -31,11 +31,11 @@ function runTemplate($template) {
 /*
  * Einen Wert im globalen Array $params speichern.
  *
- * @param       $key        Schl√ºssel des Wertes (Index im globalen Array)
+ * @param       $key        Schl¸ssel des Wertes (Index im globalen Array
  * @param       $value      Wert des Wertes
  *
  */
-function setValue($key, $value) {
+function setValue( $key, $value ) {
     global $params;
     $params[$key] = $value;
 }
@@ -46,7 +46,7 @@ function setValue($key, $value) {
  * @param       $list      Assoziativer Array mit den zu speichernden Werten
  *
  */
-function setValues($list) {
+function setValues( $list ) {
     global $params;
     if ( count($list )) {
         foreach ($list as $k => $v ) {
@@ -56,128 +56,76 @@ function setValues($list) {
 }
 
 /*
- * Liefert die √ºber den Parameter "id" definierte Funktion zur√ºck
-*/
-function getId() {
-	if (isset($_REQUEST['id'])) return $_REQUEST['id'];
-	else return "";
-}
-
-/*
  * Wert aus dem globalen Array lesen
  *
- * @param       $key      Index des gew√ºnschten Wetes
+ * @param       $field      Index des gew¸nschten Wetes
  *
  */
-function getValue($key) {
+function getValue( $key ) {
     global $params;
-	if (isset($params[$key])) return $params[$key];
-	else return "";
+    return $params[$key];
 }
 
 /*
  * Wert aus dem globalen Array lesen und in HTML-Syntax umwandeln
  *
- * @param       $field      Index des gew√ºnschten Wetes
+ * @param       $field      Index des gew¸nschten Wetes
  *
  */
-function getHtmlValue($key) {
+function getHtmlValue( $key ) {
     global $params;
-	if (isset($params[$key])) return htmlentities($params[$key]);
-	else return "";
+    return htmlentities($params[$key]);
 }
 
-/*
+/**
  * Erstellt das Menu und gibt dieses aus. Wird im Haupttemplate aufgerufen.
- * @param   $mlist      Array mit den Menueintr√§gen. key: ID (Funktion), value: Menuoption
+ *
+ * @param   $mlist      Array mit den Menueintr‰gen. key: ID (Funktion), value: Menuoption
  * @param   $title      Menutitel
+ * @param   $horizonal  true/false (horizontale/vertikale Ausrichtung des Menus)
  */
-function getMenu($mlist, $title="") {
-	$loginMenu = isLoginMenu();
-    if (count($mlist)) {
-        $active_link = getId();
-        if (empty($active_link)) $active_link=key($mlist);
-        $printmenu = "<table border='0' class='table_menu'>\n";
-        if (!empty($title)) $printmenu .= "<tr><th align='left'>$title</th></tr>\n";
-		if ($loginMenu) {
-			foreach ($mlist as $index=>$value) {
-				if ($index == $active_link) $active = "id='active'";
-				else $active = "";
-				$printmenu .= "<tr><td nowrap><a class='link_menu' $active href='".$_SERVER['PHP_SELF']."?id=$index'>$value</a></td></tr>\n";
-			}
-		} else {
-			$menuEntry = getValue('cfg_menu_level_member');
-			foreach ($mlist as $index=>$value) {
-				if ($index == $active_link) $active = "id='active'";
-				else $active = "";
-				$printmenu .= "<tr><td nowrap><a class='link_menu' $active href='".$_SERVER['PHP_SELF']."?id=$index'>$value</a></td></tr>\n";
-			}
-        }
-        $printmenu .= "</table>\n";
-    }
-    return $printmenu;
-}
-
-/*
- * Pr√ºft, ob es sich um das Login-Menu handelt (ansonsten = Member-Menu)
- */
-function isLoginMenu() {
-  if (getValue('menu_eintraege') == "cfg_menu_login") return true;
-  else return false;
-}
-
-/*
- * Wert in den superglobalen Array $_SESSION schreiben
- *
- * @param       $key      Index des gew√ºnschten Wertes
- * @param       $value    Wert, der in die Variable geschrieben wird
- *
- */
-function setSessionValue($key, $value) {
-    $_SESSION[$key] = $value;
-}
-
-/*
- * Wert aus dem superglobalen Array $_SESSION lesen
- *
- * @param       $key      Index des gew√ºnschten Wertes
- *
- */
-function getSessionValue($key) {
-	if (isset($_SESSION[$key])) return $_SESSION[$key];
-	else return "";
+function getMenu( $mlist, $title="", $horizontal=false ) {
+            if ( count($mlist )) {
+                //$active_link = $_REQUEST['id'];
+                $active_link = getValue('func');
+                if (empty($active_link)) $active_link=key($mlist);
+                $printmenu = "<table class=\"table_menu\">";
+                if ( !empty($title) && !$horizontal ) $printmenu .= "<tr><th align=\"left\">$title</th></tr>";
+                if ($horizontal) $printmenu .= "<tr>";
+                foreach ( $mlist as $element => $option ) {
+                    if (!$horizontal) $printmenu .= "<tr>";
+                    $active = "";
+                    if ( $element == $active_link) $active = "id=active";
+                    $printmenu .= "<td nowrap><a class=\"link_menu\" $active href=\"".$_SERVER['PHP_SELF']."?id=".$element."\">".
+                    $option."</a></td>";
+                    if (!$horizontal) $printmenu .= "</tr>";
+                }
+                if ($horizontal) $printmenu .= "</tr>";
+                $printmenu .= "</table>";
+            }
+            echo $printmenu;
 }
 
 /**
- * √úbergebenen String escapen (Sicherheitsgr√ºnde!) und zur√ºckgeben
+ * ‹bergebene SQL-Anweisung auf der DB ausf¸hren und Resultat zur¸ckgeben.
  *
- * @param   $attribut       Attribut, das in eine Tabelle eingef√ºgt werden soll
+ * @param   $sql       Select-Befehl, welcher ausgef¸hrt werden soll
  */
-function escapeSpecialChars($attribut) {
-	return mysqli_real_escape_string(getValue('cfg_db'), $attribut);
+function sqlSelect($sql) {  
+    $result = mysql_query($sql);
+ 	if ( !$result ) die("Fehler: ".mysql_error());
+ 	while ( $row=mysql_fetch_assoc($result) ) $data[]=$row;
+	return isset($data);
 }
 
 /**
- * √úbergebene SQL-Anweisung auf der DB ausf√ºhren und Resultat zur√ºckgeben.
+ * F¸hrt einen SQL-Befehl aus.
  *
- * @param   $sql       Select-Befehl, welcher ausgef√ºhrt werden soll
+ * @param   $sql    SQL-Befehl, welcher ausgef¸hrt werden soll
  */
-function sqlSelect($sql) {
-	$data = "";
- 	$result = mysqli_query(getValue('cfg_db'), $sql);
- 	if (!$result ) die("Fehler: ".mysqli_error());
- 	while ($row=mysqli_fetch_assoc($result)) $data[]=$row;
-	return $data;
-}
-
-/**
- * F√ºhrt einen SQL-Befehl aus.
- *
- * @param   $sql    SQL-Befehl, welcher ausgef√ºhrt werden soll
- */
- function sqlQuery($sql) {
-	$result = mysqli_query(getValue('cfg_db'), $sql);
- 	if (!$result) die(mysqli_error(getValue('cfg_db'))."<pre>".$sql."</pre>");
+function sqlQuery($sql) {
+ 	$result = mysql_query($sql);
+ 	if ( !$result ) die(mysql_error()."<pre>".$sql."</pre>");
 }
 
 /**
@@ -185,31 +133,31 @@ function sqlSelect($sql) {
  *
  * @param   $id     ID der Funktion, welche aufgerufen werden soll
  */
-function redirect($id="") {
+function redirect( $id="" ) {
     if (!empty($id)) $id="?id=$id";
     header("Location: ".$_SERVER['PHP_SELF'].$id);
     exit();
 }
 
 /**
- * Pr√ºft ob ein Eingabewert leer ist oder nicht.
+ * Pr¸ft ob ein Eingabewert leer ist oder nicht.
  *
  * @param   $value      Eingabewert
- * @param   $maxlength  Minimale L√§nge der Eingabe
+ * @param   $maxlength  Minimale L‰nge der Eingabe
  */
-function CheckEmpty($value, $minlength=Null) {
+function CheckEmpty( $value, $minlength=Null ) {
     if (empty($value)) return false;
     if ( $minlength != Null && strlen($value) < $minlength ) return false;
     else return true;
 }
 
 /**
- * Pr√ºft, ob eine Emailadresse korrekt ist oder nicht.
+ * Pr¸ft ob eine Emailadresse korrekt ist oder nicht.
  *
  * @param   $value      Eingabewert
  * @param   $empty      Die Email-Adresse kann leer sein ('Y') oder nicht ('N')
  */
-function CheckEmailFormat($value, $empty='N') {
+function CheckEmail( $value, $empty='N' ) {
     $pattern_email = '/^[^@\s<&>]+@([-a-z0-9]+\.)+[a-z]{2,}$/i';
     if ($empty=='Y' && empty($value)) return true;
     if ( preg_match($pattern_email, $value) ) return true;
@@ -217,104 +165,78 @@ function CheckEmailFormat($value, $empty='N') {
 }
 
 /**
- * Pr√ºft, ob eine Name (Nachname, Vorname) korrekt ist oder nicht.
- * Erlaubt sind die Zeichen in den eckigen Klammern, mit einer L√§nge
+ * Pr¸ft ob eine Name (Nachname, Vorname) korrekt ist oder nicht.
+ * Erlaubt sind die Zeichen in den eckigen Klammern, mit einer L‰nge
  * von mindestens 2 Zeichen.
  *
  * @param   $value      Eingabewert
  * @param   $empty      Der Name kann leer sein ('Y') oder nicht ('N')
  */
-function CheckName($value, $empty='N') {
-    $pattern_name = '/^[a-zA-Z√§√∂√º√Ñ√ñ√ú \-]{2,}$/';
+function CheckName( $value, $empty='N' ) {
+    $pattern_name = '/^[a-zA-Z‰ˆ¸ƒ÷‹ \-]{2,}$/';
     if ($empty=='Y' && empty($value)) return true;
-    if (preg_match($pattern_name, $value)) return true;
+    if ( preg_match($pattern_name, $value) ) return true;
     else return false;
 }
 
 /**
- * Pr√ºft, ob ein Passwort korrekt ist oder nicht. Das Pattern:
- *  - Die L√§nge muss 8-20 Zeichen sein
- *  - Es muss mind. 1 Ziffer enthalten sein (?=.*\d)
- *  - Es muss min. 1 Kleinbuchstabe enthalten sein (?=.*[a-z])
- *  - Es muss min. 1 Grossbuchstabe enthalten sein(?=.*[A-Z])
- *  - Es muss min. 1 Sonderzeichen enthalten sein (\W = Alle Zeichen ausser Ziffern und Buschstaben und "_")
+ * Pr¸ft ob eine Ort korrekt ist oder nicht.
  *
  * @param   $value      Eingabewert
+ * @param   $empty      Der Ort kann leer sein ('Y') oder nicht ('N')
  */
-function CheckPasswordFormat($value) {
-	$pattern_pw = '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,20}$/';
-    if (preg_match($pattern_pw, $value)) return true;
+function CheckOrt( $value, $empty='N' ) {
+    $pattern_ort = '/^[a-zA-Z‰ˆ¸ƒ÷‹ \-]{2,}$/';
+    if ($empty=='Y' && empty($value)) return true;
+    if (empty($value)) return false;
+    if ( preg_match($pattern_ort, $value) ) return true;
     else return false;
 }
 
 /**
- * Pr√ºft ob zwei Passw√∂rter identisch sind.
+ * Pr¸ft ob es sich beim ¸bergebenen Wert um eine Zahl handelt.
  *
- * @param   $value1     Passwort
- * @param   $value2     Passwortwiederholung
+ * @param   $value      ‹bergebender Wert
  */
-function CheckPasswordCompare($value1, $value2) {
-    if ($value2 == $value1) return true;
-	else return false;
-}
-
-/*
- * Verschluesselt das Passwort mit einem Hash-Algorithmus
- *
- * @param       $passwort      Das Passwort, das verschl√ºsselt wird
- *
-*/
-function passwordHash($passwort) {
-	return password_hash($passwort, PASSWORD_BCRYPT);
-}
-
-/*
- * Liefert den Wert des gew√ºnschten Parameters zur√ºck, der via POST bzw. GET √ºbergeben worden ist
-*/
-function getRequestParam($param) {
-	if (isset($_REQUEST[$param])) return $_REQUEST[$param];
-	else return "";
-}
-
-/*
- * Bereitet einen Text f√ºr die Ausbage in HTML vor
-*/
-function htmlTextAufbereiten($value) {
-	return nl2br(htmlentities($value));
-}
-
-/**
- * Pr√ºft ob es sich beim √ºbergebenen Wert um eine Zahl handelt.
- *
- * @param   $value      √úbergebender Wert
- */
-function isNumber($value) {
-    if (!is_numeric($value)) return false;
+function isNumber( $value ) {
+    if ( !is_numeric($value) ) return false;
     return true;
 }
 
 /**
- * Pr√ºft ob es sich beim √ºbergebenen Wert um eine positive Ganzzahl handelt (ohne e,+,-).
- *
- * @param   $value      √úbergebender Wert
- */
-function isCleanNumber($value) {
-    if (!is_numeric($value)) return false;
-    $pattern_number = '/^[0-9]*$/';
-    if (preg_match($pattern_number, $value)) return true;
-    else return false;
-    return true;
-}
-
-/**
- * Pr√ºft ob ein Eingabewert eine Zahl ist. Eine Leereingabe ist erlaubt.
+ * Pr¸ft ob ein Eingabewert eine Zahl ist.
  *
  * @param   $value         Eingabewert
- * @param   $minlength     Minimale L√§nge der Zahl
+ * @param   $minlength     Minimale L‰nge der Zahl
  */
-function CheckCleanNumberEmpty($value, $minlength=0) {
-    if (empty($value)) return true;
-    if (!isCleanNumber($value) || strlen($value) < $minlength) return false;
+function CheckNumber( $value ) {
+    if ( !isNumber($value) ) return false;
     else return true;
 }
+
+/**
+ * Pr¸ft ob es sich beim ¸bergebenen Wert um eine positive Ganzzahl handelt (ohne e,+,-).
+ *
+ * @param   $value      ‹bergebender Wert
+ */
+function isCleanNumber( $value ) {
+    if ( !is_numeric($value) ) return false;
+    $pattern_number = '/^[0-9]*$/';
+    if ( preg_match($pattern_number, $value) ) return true;
+    else return false;
+    return true;
+}
+
+/**
+ * Pr¸ft ob ein Eingabewert eine Zahl ist. Eine Leereingabe ist erlaubt.
+ *
+ * @param   $value         Eingabewert
+ * @param   $minlength     Minimale L‰nge der Zahl
+ */
+function CheckCleanNumberEmpty( $value, $minlength=0) {
+    if ( empty($value) ) return true;
+    if ( !isCleanNumber($value) || strlen($value) < $minlength ) return false;
+    else return true;
+}
+
 ?>
