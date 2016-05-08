@@ -77,7 +77,10 @@ a.meta_menu:hover, a.meta_menu:active {
   font-weight:bold;
   text-decoration: none;
 }
-
+.pagecontent {
+  padding-top: 3%;
+  max-width: 98%;
+}
 
 
 /* Login Form */

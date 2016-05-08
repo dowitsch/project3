@@ -97,22 +97,23 @@ function getMenu($mlist, $title="") {
     if (count($mlist)) {
         $active_link = getId();
         if (empty($active_link)) $active_link=key($mlist);
-        $printmenu = "<ul class='nav navbar-nav'>\n";
+        $printmenu = "<table border='0' class='table_menu'>\n";
+        if (!empty($title)) $printmenu .= "<tr><th align='left'>$title</th></tr>\n";
 		if ($loginMenu) {
 			foreach ($mlist as $index=>$value) {
 				if ($index == $active_link) $active = "id='active'";
 				else $active = "";
-				$printmenu .= "<li><a $active href='".$_SERVER['PHP_SELF']."?id=$index'>$value</a><li>\n";
+				$printmenu .= "<tr><td nowrap><a class='link_menu' $active href='".$_SERVER['PHP_SELF']."?id=$index'>$value</a></td></tr>\n";
 			}
 		} else {
 			$menuEntry = getValue('cfg_menu_level_member');
 			foreach ($mlist as $index=>$value) {
 				if ($index == $active_link) $active = "id='active'";
 				else $active = "";
-				$printmenu .= "<li><a $active href='".$_SERVER['PHP_SELF']."?id=$index'>$value</a></li>\n";
+				$printmenu .= "<tr><td nowrap><a class='link_menu' $active href='".$_SERVER['PHP_SELF']."?id=$index'>$value</a></td></tr>\n";
 			}
         }
-        $printmenu .= "</div>\n";
+        $printmenu .= "</table>\n";
     }
     return $printmenu;
 }
