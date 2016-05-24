@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css"/>
-	<script src="../js/jscript.js"></script>
 	<title>Bilderdatenbank</title>
 </head>
 <body>
@@ -19,7 +18,7 @@
 			<tr>
 				<td class="nav" width="200" valign="top" align="center">
                     <?php echo getMenu(getValue(getValue('menu_eintraege')), getValue('menu_titel')); ?>
-				</td>	
+				</td>
 				<td class="content" width="804" valign="top" align="left">
                     <table border="0" width="100%" cellpadding="5" cellspacing="0">
                         <tr><td> <?php echo getValue('inhalt');?> </td></tr>

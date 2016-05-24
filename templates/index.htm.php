@@ -14,7 +14,6 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css"/>
-	<script src="../js/jscript.js"></script>
 	<title>Bilderdatenbank</title>
 
 </head>
@@ -36,7 +35,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                
+
 				<?php echo getMenu(getValue(getValue('menu_eintraege')), getValue('menu_titel')); ?>
 
             </div>
@@ -59,12 +58,6 @@
 
         		<?php echo getValue('inhalt');?>
     </div>
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 

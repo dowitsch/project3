@@ -1,5 +1,5 @@
  <?php
- require('/home/jbinder/programs/psysh');
+ require('/home/fammann/programs/psysh');
 /*
  *  @autor Michael Abplanalp
  *  @version 1.0
