@@ -24,18 +24,15 @@ function logout(){
  * Beinhaltet die Anwendungslogik zum Login
  */
 function login() {
-  if(angemeldet){
-    return runTemplate( "../templates/index.htm.php" );
-  }
   $email = $_POST['email'];
   $password = $_POST['password'];
   if(isset($email) && isset($password)){
     $user = get_user($email);
     if(authenticate_user($user, $password)){
       setSessionValue("benutzerId", user["bid"]);
+      redirect('fotoalben');
     }
   }
-	// Das Forum wird ohne Angabe der Funktion aufgerufen bzw. es wurde auf die Schaltfläche "abbrechen" geklickt
 	setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
 	return runTemplate( "../templates/login.htm.php" );
 }
