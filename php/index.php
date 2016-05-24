@@ -1,14 +1,15 @@
  <?php
+ require('/home/jbinder/programs/psysh');
 /*
  *  @autor Michael Abplanalp
  *  @version 1.0
- * 
+ *
  *  Ausschliessliche dieses Modul wird über die URL aufgerufen. Je nach übergebenem
  *  Parameter "id" wird die entsprechende Funktion ausgeführt. Am Schluss wird das
  *  Haupttemülate eingefügt.
- * 
+ *
  *  Beispielaufruf:         http://localhost/index.php?id=show
- * 
+ *
  *  Im Beispiel wird die Funktion "show" ausgeführt.
  */
 session_start();

@@ -20,6 +20,6 @@ setValue('cfg_menu_login', array("login"=>"Login","registration"=>"Registration"
 setValue('cfg_menu_member', array("fotoalben"=>"Fotoalben"));
 
 // Datenbankverbindung herstellen
-$db = mysqli_connect("127.0.0.1", "root", "gibbiX12345", "bilderdb");	// Zu Datenbankserver verbinden		
+$db = mysqli_connect("127.0.0.1", "root", "sql", "bilderdb");	// Zu Datenbankserver verbinden		
 setValue('cfg_db', $db);
 ?>

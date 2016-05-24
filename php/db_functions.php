@@ -9,8 +9,14 @@
  *
  */
 
-function db_insert_benutzer($params, $passwort) {
+function db_insert_benutzer($user, $password) {
     $sql = "insert into benutzer (vorname, nachname, email, passwort)
             values ('".escapeSpecialChars($params['vorname'])."','".escapeSpecialChars($params['nachname'])."','".escapeSpecialChars($params['email'])."','".$passwort."')";
     sqlQuery($sql);
+}
+
+function get_user($email) {
+  $sql = "select * from benutzer where email='".$email."';";
+  $result = sqlSelect($sql);
+  return $result[0];
 }
