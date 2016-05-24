@@ -29,7 +29,7 @@ function login() {
   if(isset($email) && isset($password)){
     $user = get_user($email);
     if(authenticate_user($user, $password)){
-      setSessionValue("benutzerId", user["bid"]);
+      setSessionValue("benutzerId", $user["bid"]);
       redirect('fotoalben');
     }
   }
