@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `gellery` (
   `gallery_id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
   `description` text COLLATE utf8_german2_ci DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `bid` int(11) NOT NULL
 )
 
 --

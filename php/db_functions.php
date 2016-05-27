@@ -22,7 +22,7 @@ function get_user($email) {
 }
 
 function getGalleries($user_id) {
-        $sql = "select * from gallery where user_id = ".$user_id.";";
+        $sql = "select * from gallery where bid = ".$user_id.";";
         return sqlSelect($sql);
     }
 

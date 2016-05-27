@@ -34,12 +34,13 @@ function gallery_form() {
     insertGallery($_POST);
     setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
     return runTemplate( "../templates/gallery_form.htm.php" );
+}
 
 function deleteFotoalben(){
   eval(\Psy\sh());
 }
 
 function showGallery(){
-  
+
 }
 ?>
