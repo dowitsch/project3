@@ -12,7 +12,9 @@
  */
 function registration() {
   // Template abfüllen und Resultat zurückgeben
-  db_insert_benutzer($_POST);
+  if(!empty($_POST)) {
+    db_insert_benutzer($_POST);
+  }
   setValue( 'phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__ );
   return runTemplate( "../templates/registration.htm.php" );
 }
