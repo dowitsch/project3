@@ -6,10 +6,6 @@
  *  Dieses Modul definert alle Konfigurationsparameter und stellt die DB-Verbindung her.
  */
 
-// Default-CSS-Klasse zur Formatierung der Eingabefelder
-setValue('cfg_css_class_normal',"txt");
-// Klasse zur Formatierung der Eingabefelder, falls die Eingabeprüfung negativ ausfällt
-setValue('cfg_css_class_error',"err");
 // Akzeptierte Funktionen Login
 setValue('cfg_func_login', array("login","registration"));
 // Akzeptierte Funktionen Memberbereich
