@@ -32,13 +32,16 @@ function galleryForm() {
     // Template abfüllen und Resultat zurückgeben
     if(!empty($_POST)) {
       insertGallery($_POST);
+      redirect('fotoalben');
+      return;
     }
     setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
     return runTemplate( "../templates/galleryForm.htm.php" );
 }
 
 function deleteFotoalben(){
-  eval(\Psy\sh());
+  deleteGallery(getSessionValue('benutzerId'), $_GET['gallery_id']);
+  redirect('fotoalben');
 }
 
 function showGallery(){

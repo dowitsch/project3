@@ -87,9 +87,9 @@ function insertGallery($gallery) {
  * @param type $gallery_id
  * @param type $user_id
  */
-function deleteGallery($gallery_id, $user_id) {
-    $dbh = $this->con->prepare("DELETE FROM gallery WHERE galleryid = ? AND bid = ?");
-    $dbh->execute(array($gallery_id, $user_id));
+function deleteGallery($user_id, $gallery_id) {
+    $sql = "delete from gallery where gallery_id = ".$gallery_id." AND bid = ".$user_id.";";
+    sqlQuery($sql);
 }
 
 /**

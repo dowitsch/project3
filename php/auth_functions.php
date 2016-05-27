@@ -28,7 +28,6 @@ function logout(){
  * Beinhaltet die Anwendungslogik zum Login
  */
 function login() {
-  eval(\Psy\sh());
   $email = $_POST['email'];
   $password = $_POST['password'];
   if(isset($email) && isset($password)){

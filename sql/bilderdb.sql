@@ -28,19 +28,20 @@ USE `bilderdb`;
 -- Tabellenstruktur für Tabelle `gellery`
 --
 
-CREATE TABLE IF NOT EXISTS `gellery` (
-  `gallery_id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
-  `description` text COLLATE utf8_german2_ci DEFAULT NULL,
-  `bid` int(11) NOT NULL
-)
+CREATE TABLE IF NOT EXISTS `gallery` (
+  gallery_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
+  description text COLLATE utf8_german2_ci DEFAULT NULL,
+  bid int(11) NOT NULL,
+  PRIMARY KEY (gallery_id)
+);
 
 --
 -- Tabellenstruktur für Tabelle `benutzer`
 --
 
 CREATE TABLE IF NOT EXISTS `benutzer` (
-  `bid` int(11) NOT NULL,
+  `bid` int(11) NOT NULL AUTO_INCREMENT,
   `vorname` varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
   `nachname` varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_german2_ci NOT NULL,
