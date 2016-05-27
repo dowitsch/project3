@@ -19,7 +19,7 @@ setValue('cfg_menu_login', array("login"=>"Login","registration"=>"Registration"
 // Inhalt des Menus im Memberbereich
 setValue('cfg_menu_member', array("fotoalben"=>"Fotoalben", "logout"=>"Logout"));
 
-// Datenbankverbindung herstellen
-$db = mysqli_connect("127.0.0.1", "root", "sql", "bilderdb");	// Zu Datenbankserver verbinden
+
+$db = mysqli_connect("localhost", "test", "test123", "bilderdb");	// Zu Datenbankserver verbinden		
 setValue('cfg_db', $db);
 ?>

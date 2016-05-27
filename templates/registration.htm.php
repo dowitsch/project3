@@ -6,7 +6,7 @@
                 <div class="panel-body">
                     <h5 class="text-center">
                         SIGN UP</h5>
-             	  	<form name="registration" action="<?php echo setValue('phpmodule'); ?>" method="post">
+             	  	<form name="registration" action="<?php echo getValue('phpmodule'); ?>" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input type="text" class="form-control" name="vnachname" placeholder="Nachname" />
+                            <input type="text" class="form-control" name="nachname" placeholder="Nachname" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -39,4 +39,4 @@
         </div>
     </div>
 </div>
-</div> 
+</div>

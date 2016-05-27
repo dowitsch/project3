@@ -9,9 +9,9 @@
  *
  */
 
-function db_insert_benutzer($user, $password) {
+function db_insert_benutzer($user) {
     $sql = "insert into benutzer (vorname, nachname, email, passwort)
-            values ('".escapeSpecialChars($params['vorname'])."','".escapeSpecialChars($params['nachname'])."','".escapeSpecialChars($params['email'])."','".$passwort."')";
+            values ('".escapeSpecialChars($user['vorname'])."','".escapeSpecialChars($user['nachname'])."','".escapeSpecialChars($user['email'])."','".($user['passwort'])."')";
     sqlQuery($sql);
 }
 
