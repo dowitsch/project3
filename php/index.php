@@ -1,5 +1,5 @@
  <?php
- require('/home/fammann/programs/psysh');
+ require('/home/jbinder/programs/psysh');
 /*
  *  @autor Michael Abplanalp
  *  @version 1.0
@@ -23,6 +23,7 @@ include("appl_functions.php");
 // anmeldung(), check_security(), etc.
 
 if (angemeldet()) {
+  // session_destroy();
 	// Falls cfg_func_member nicht existiert, abbrechen!
 	$flist = getValue('cfg_func_member');
 	if (!count($flist)) die("cfg_func_member nicht definiert!");

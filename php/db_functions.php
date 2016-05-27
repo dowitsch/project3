@@ -22,9 +22,8 @@ function get_user($email) {
 }
 
 function getGalleries($user_id) {
-        $dbh = $this->con->prepare("SELECT * FROM gallery WHERE user_id = ?");
-        $dbh->execute(array($user_id));
-        return $dbh->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "select * from gallery where user_id = ".$user_id.";";
+        return sqlSelect($sql);
     }
 
 /**

@@ -13,7 +13,7 @@ setValue('cfg_css_class_error',"err");
 // Akzeptierte Funktionen Login
 setValue('cfg_func_login', array("login","registration"));
 // Akzeptierte Funktionen Memberbereich
-setValue('cfg_func_member', array("fotoalben","logout", "gallery_form"));
+setValue('cfg_func_member', array("fotoalben","logout","deleteFotoalben","showGallery", "gallery_form"));
 // Inhalt des Login-Menus
 setValue('cfg_menu_login', array("login"=>"Login","registration"=>"Registration"));
 // Inhalt des Menus im Memberbereich
@@ -22,6 +22,7 @@ setValue('cfg_menu_member', array("fotoalben"=>"Fotoalben", "logout"=>"Logout", 
 setValue('cfg_menu_login', array("login"=>"Login","registration"=>"Registration"));
 
 
-$db = mysqli_connect("localhost", "test", "test123", "bilderdb");	// Zu Datenbankserver verbinden
+
+$db = mysqli_connect("localhost", "root", "sql", "bilderdb");	// Zu Datenbankserver verbinden
 setValue('cfg_db', $db);
 ?>
