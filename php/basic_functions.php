@@ -316,4 +316,18 @@ function CheckCleanNumberEmpty($value, $minlength=0) {
     if (!isCleanNumber($value) || strlen($value) < $minlength) return false;
     else return true;
 }
+
+/**
+ * Fügt einen neuen Error hinzu
+ *
+ * @param   $message         Errormessage
+ */
+function addError($message){
+	$errors = getSessionValue('errors');
+	if(!is_array($errors)){
+		$errors = [];
+	}
+	array_push($errors, $message);
+	setSessionValue('errors', $errors);
+}
 ?>

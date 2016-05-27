@@ -31,6 +31,8 @@ function login() {
     if(authenticate_user($user, $password)){
       setSessionValue("benutzerId", $user["bid"]);
       redirect('fotoalben');
+    }else{
+      addError('Authentication failed');
     }
   }
 	setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
