@@ -18,6 +18,7 @@ function registration() {
 
 function logout(){
   session_destroy();
+  redirect('login');
 }
 
 /*
