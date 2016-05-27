@@ -27,4 +27,11 @@ function fotoalben() {
     setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
     return runTemplate( "../templates/fotoalben.htm.php" );
 }
+
+function gallery_form() {
+    // Template abfüllen und Resultat zurückgeben
+    insertGallery($_POST);
+    setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
+    return runTemplate( "../templates/gallery_form.htm.php" );
+}
 ?>

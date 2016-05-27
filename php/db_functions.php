@@ -76,9 +76,11 @@ function getThumbs($gallery_id) {
  * @param type $desc
  * @param type $user_id
  */
-function insertGallery($name, $desc, $user_id) {
-    $dbh = $this->con->prepare("INSERT INTO gallery (name, description, user_id) VALUES(?, ?, ?)");
-    $dbh->execute(array($name, $desc, $user_id));
+function insertGallery($gallery) {
+
+    $sql = "insert into gallery (name, description, bid)
+            values ('".escapeSpecialChars($gallery['name'])."','".escapeSpecialChars($gallery['description'])."','".getSessionValue("benutzerId")."')";
+    sqlQuery($sql);
 }
 
 /**
@@ -87,7 +89,7 @@ function insertGallery($name, $desc, $user_id) {
  * @param type $user_id
  */
 function deleteGallery($gallery_id, $user_id) {
-    $dbh = $this->con->prepare("DELETE FROM gallery WHERE gallery_id = ? AND user_id = ?");
+    $dbh = $this->con->prepare("DELETE FROM gallery WHERE galleryid = ? AND bid = ?");
     $dbh->execute(array($gallery_id, $user_id));
 }
 
