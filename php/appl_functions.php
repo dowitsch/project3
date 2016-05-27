@@ -28,12 +28,13 @@ function fotoalben() {
     return runTemplate( "../templates/fotoalben.htm.php" );
 }
 
-
-function gallery_form() {
+function galleryForm() {
     // Template abfüllen und Resultat zurückgeben
-    insertGallery($_POST);
+    if(!empty($_POST)) {
+      insertGallery($_POST);
+    }
     setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
-    return runTemplate( "../templates/gallery_form.htm.php" );
+    return runTemplate( "../templates/galleryForm.htm.php" );
 }
 
 function deleteFotoalben(){

@@ -5,7 +5,7 @@
                 <div class="panel-body">
                     <h5 class="text-center">
                         CREATE GALLERY</h5>
-             	  	<form name="gallery_form" action="<?php echo getValue('phpmodule'); ?>" method="post">
+             	  	<form name="galleryForm" action="<?php echo getValue('phpmodule'); ?>" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
