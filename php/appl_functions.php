@@ -40,7 +40,7 @@ function galleryForm() {
 }
 
 function deleteFotoalben(){
-  deleteGallery(getSessionValue('benutzerId'), $_GET['gallery_id']);
+  deleteGallery(getSessionValue('benutzerId'), $_GET['galleryid']);
   redirect('fotoalben');
 }
 

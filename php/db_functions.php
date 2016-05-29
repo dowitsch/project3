@@ -88,7 +88,7 @@ function insertGallery($gallery) {
  * @param type $user_id
  */
 function deleteGallery($user_id, $gallery_id) {
-    $sql = "delete from gallery where gallery_id = ".$gallery_id." AND bid = ".$user_id.";";
+    $sql = "delete from gallery where galleryid = ".$galleryid." AND bid = ".$user_id.";";
     sqlQuery($sql);
 }
 
@@ -102,6 +102,9 @@ function deleteGallery($user_id, $gallery_id) {
  * @param type $gallery_id
  */
 function insertImage($image, $pic) {
+
     $sql = "INSERT INTO pictures (name, thumbnail, image_path, filetype, user_id, gallery_id)
-            VALUES (".$_FILES['file']['name'].",".$pic.", ?, ?, ?, ?);";
+            VALUES ('".$image['name']."',".$pic.",'uploads/".$_FILES['file']['name']."' , '".$_FILES['file']['type']."',".getSessionValue('benutzerId'). ",".$_GET['galleryid'].");";
+            eval(\Psy\sh());
+    sqlQuery($sql);
 }

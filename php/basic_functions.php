@@ -352,7 +352,7 @@ function resizeAndSaveImage($width, $height){
   $image = imagecreatefromstring($imgString);
 	saveImage($image);
   $tmp = imagecreatetruecolor($width, $height);
-  imagecopyresampled($tmp, $image,
+  $thumb = imagecopyresampled($tmp, $image,
     0, 0,
     $x, 0,
     $width, $height,

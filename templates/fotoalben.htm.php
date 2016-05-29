@@ -9,14 +9,14 @@ foreach ($galleries as $gallery) {
   ?>
   <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-          <a href="/php/index.php?id=showGallery" >
+          <a href=<?="/php/index.php?id=showGallery&galleryid=".$gallery["galleryid"]?> >
               <img src="../images/foto-top.png" alt="<?= $gallery["name"] ?>">
               <div class="caption">
                   <h3><?= $gallery["name"] ?></h3>
                   <?= $gallery["description"] ?>
               </div>
           </a>
-          <a href=<?= "/php/index.php?id=deleteFotoalben&gallery_id=".$gallery["gallery_id"] ?> class="btn btn-danger pull-right delete">delete</a>
+          <a href=<?= "/php/index.php?id=deleteFotoalben&gallery_id=".$gallery["galleryid"] ?> class="btn btn-danger pull-right delete">delete</a>
       </div>
   </div>
 </div>
