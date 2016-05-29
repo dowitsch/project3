@@ -330,4 +330,74 @@ function addError($message){
 	array_push($errors, $message);
 	setSessionValue('errors', $errors);
 }
+
+/**
+ * Image resize
+ * @param int $width
+ * @param int $height
+ */
+function resizeAndSaveImage($width, $height){
+	checkImage();
+  /* Get original image x y*/
+  list($w, $h) = getimagesize($_FILES['file']['tmp_name']);
+  /* calculate new image size with ratio */
+  $ratio = max($width/$w, $height/$h);
+  $h = ceil($height / $ratio);
+  $x = ($w - $width / $ratio) / 2;
+  $w = ceil($width / $ratio);
+  /* new file name */
+  /* read binary data from image file */
+  $imgString = file_get_contents($_FILES['file']['tmp_name']);
+  /* create image from string */
+  $image = imagecreatefromstring($imgString);
+	saveImage($image);
+  $tmp = imagecreatetruecolor($width, $height);
+  imagecopyresampled($tmp, $image,
+    0, 0,
+    $x, 0,
+    $width, $height,
+    $w, $h);
+  return $tmp;
+
+  /* cleanup memory */
+
+
+  imagedestroy($image);
+  imagedestroy($tmp);
+}
+
+function saveImage($image){
+		  /* Save image */
+	$path = '../uploads/'.$_FILES['file']['name'];
+
+	switch ($_FILES['file']['type']) {
+		case 'image/jpeg':
+			imagejpeg($image, $path, 100);
+			break;
+		case 'image/png':
+			imagepng($image, $path, 0);
+			break;
+		case 'image/gif':
+			imagegif($image, $path);
+			break;
+		default:
+			exit;
+			break;
+	}
+}
+
+
+function checkImage() {
+// settings
+$max_file_size = 1024*200; // 200kb
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['file'])) {
+  if( $_FILES['file']['size'] > $max_file_size ){
+    addError('Please upload image smaller than 200KB');
+		redirect('pictureForm');
+      }
+}
+}
+
+
 ?>

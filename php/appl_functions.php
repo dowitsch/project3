@@ -45,6 +45,18 @@ function deleteFotoalben(){
 }
 
 function showGallery(){
-
+  setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
+  return runTemplate( "../templates/showGallery.htm.php" );
 }
+
+function pictureForm(){
+  if(!empty($_POST)) {
+    $pic = resizeAndSaveImage(200, 200);
+    insertImage($_POST, $pic);
+    redirect('showGallery');
+  }
+  setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
+  return runTemplate( "../templates/pictureForm.htm.php" );
+}
+
 ?>

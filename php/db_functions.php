@@ -101,9 +101,7 @@ function deleteGallery($user_id, $gallery_id) {
  * @param type $user_id
  * @param type $gallery_id
  */
-function insertImage($name, $thumbnail, $image_path, $filetype, $user_id, $gallery_id) {
-    $dbh = $this->con->prepare("INSERT INTO image (name, thumbnail, "
-            . "image_path, filetype, user_id, gallery_id) "
-            . "VALUES (?, ?, ?, ?, ?, ?);");
-    $dbh->execute(array($name, $thumbnail, $image_path, $filetype, $user_id, $gallery_id));
+function insertImage($image, $pic) {
+    $sql = "INSERT INTO pictures (name, thumbnail, image_path, filetype, user_id, gallery_id)
+            VALUES (".$_FILES['file']['name'].",".$pic.", ?, ?, ?, ?);";
 }
