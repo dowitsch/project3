@@ -27,17 +27,15 @@ function getGalleries($user_id) {
     }
 
 /**
- * Returns a gallery from the database if its user_id is equal to the one given
- * as parameter
- * @param int $gallery_id
- * @param int $user_id
- * @return array
+ * Delete gallery from the DB
+ * @param type $gallery_id
+ * @param type $user_id
  */
-function getGallery($gallery_id, $user_id) {
-    $dbh = $this->con->prepare("SELECT * FROM gallery WHERE gallery_id = ? AND user_id = ?");
-    $dbh->execute(array($gallery_id, $user_id));
-    return $dbh->fetchAll();
+function deleteImage($user_id, $image_id) {
+    $sql = "delete from image where image_id = ".$image_id." AND user_id = ".$user_id.";";
+    sqlQuery($sql);
 }
+
 
 /**
  * Returns all images belonging to a certain gallery
@@ -46,20 +44,9 @@ function getGallery($gallery_id, $user_id) {
  * @param int $limit
  * @return array
  */
-function getImages($gallery_id, $limit = 0) {
-    $sql = "SELECT * FROM image WHERE gallery_id = ?";
-    if ($limit != 0) {
-        $sql .= " LIMIT " . $limit . ";";
-    } else {
-        $sql .= ";";
-    }
-    $dbh = $this->con->prepare($sql);
-    if ($limit != 0) {
-        $dbh->execute(array($gallery_id, $limit));
-    } else {
-        $dbh->execute(array($gallery_id));
-    }
-    return $dbh->fetchAll(PDO::FETCH_ASSOC);
+function getImages($gallery_id) {
+    $sql = "SELECT * FROM image WHERE gallery_id = ".$gallery_id." AND user_id = ".getSessionValue("benutzerId").";";
+    return sqlSelect($sql);
 }
 
 function getThumbs($gallery_id) {
@@ -88,7 +75,7 @@ function insertGallery($gallery) {
  * @param type $user_id
  */
 function deleteGallery($user_id, $gallery_id) {
-    $sql = "delete from gallery where galleryid = ".$galleryid." AND bid = ".$user_id.";";
+    $sql = "delete from gallery where gallery_id = ".$gallery_id." AND bid = ".$user_id.";";
     sqlQuery($sql);
 }
 
@@ -103,8 +90,7 @@ function deleteGallery($user_id, $gallery_id) {
  */
 function insertImage($image, $pic) {
 
-    $sql = "INSERT INTO pictures (name, thumbnail, image_path, filetype, user_id, gallery_id)
+    $sql = "INSERT INTO image (name, thumbnail, image_path, filetype, user_id, gallery_id)
             VALUES ('".$image['name']."',".$pic.",'uploads/".$_FILES['file']['name']."' , '".$_FILES['file']['type']."',".getSessionValue('benutzerId'). ",".$_GET['galleryid'].");";
-            eval(\Psy\sh());
     sqlQuery($sql);
 }

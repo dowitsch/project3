@@ -40,13 +40,18 @@ function galleryForm() {
 }
 
 function deleteFotoalben(){
-  deleteGallery(getSessionValue('benutzerId'), $_GET['galleryid']);
+  deleteGallery(getSessionValue('benutzerId'), $_GET['gallery_id']);
   redirect('fotoalben');
 }
 
 function showGallery(){
   setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
   return runTemplate( "../templates/showGallery.htm.php" );
+}
+
+function deletePicture(){
+  deleteImage(getSessionValue('benutzerId'), $_GET['image_id']);
+  redirect('fotoalben');
 }
 
 function pictureForm(){

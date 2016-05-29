@@ -24,6 +24,18 @@ USE `bilderdb`;
 
 -- --------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS `image` (
+  image_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
+  thumbnail BLOB,
+  image_path text COLLATE utf8_german2_ci DEFAULT NULL,
+  file_type varchar(50) COLLATE utf8_german2_ci DEFAULT NULL,
+  user_id int(11) NOT NULL,
+  gallery_id int(11) NOT NULL,
+  PRIMARY KEY (image_id)
+);
+
+
 --
 -- Tabellenstruktur für Tabelle `gellery`
 --
