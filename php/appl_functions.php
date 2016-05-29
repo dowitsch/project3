@@ -56,9 +56,10 @@ function deletePicture(){
 
 function pictureForm(){
   if(!empty($_POST)) {
-    $pic = resizeAndSaveImage(200, 200);
-    insertImage($_POST, $pic);
-    redirect('showGallery');
+    $imagepath = "../uploads/" . $_FILES["file"]["name"];
+    saveImage();
+    $thumb = make_thumb($imagepath);
+    insertImage($_POST, $thumb);
   }
   setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
   return runTemplate( "../templates/pictureForm.htm.php" );

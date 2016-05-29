@@ -5,7 +5,7 @@
                 <div class="panel-body">
                     <h5 class="text-center">
                         Upload a Picture</h5>
-             	  	<form name="pictureForm" action="<?php echo getValue('phpmodule'); ?>" enctype="multipart/form-data" method="post">
+             	  	<form name="pictureForm" action="<?php echo getValue('phpmodule') . "&gallery_id=". $_GET['gallery_id']; ?>" enctype="multipart/form-data" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>

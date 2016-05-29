@@ -88,9 +88,8 @@ function deleteGallery($user_id, $gallery_id) {
  * @param type $user_id
  * @param type $gallery_id
  */
-function insertImage($image, $pic) {
-
-    $sql = "INSERT INTO image (name, thumbnail, image_path, filetype, user_id, gallery_id)
-            VALUES ('".$image['name']."',".$pic.",'uploads/".$_FILES['file']['name']."' , '".$_FILES['file']['type']."',".getSessionValue('benutzerId'). ",".$_GET['galleryid'].");";
+function insertImage($image, $thumb) {
+    $sql = "INSERT INTO image (name, thumbnail, image_path, file_type, user_id, gallery_id)
+            VALUES ('".$image['name']."','".$thumb."','uploads/".$_FILES['file']['name']."' , '".$_FILES['file']['type']."',".getSessionValue('benutzerId'). ",".$_GET['gallery_id']. ");";
     sqlQuery($sql);
 }
