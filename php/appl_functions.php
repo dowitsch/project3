@@ -65,4 +65,13 @@ function pictureForm(){
   return runTemplate( "../templates/pictureForm.htm.php" );
 }
 
+function showImage(){
+  setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
+  return runTemplate( "../templates/showImage.htm.php" );
+}
+
+function addTag(){
+  insertTag($_POST['name'], $_GET['image_id']);
+  redirect('fotoalben');
+}
 ?>

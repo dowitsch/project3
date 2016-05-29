@@ -332,72 +332,62 @@ function addError($message){
 }
 
 /**
- * Image resize
- * @param int $width
- * @param int $height
+ * Creates a thumbnail from the given image and returns it base64 encoded
+ * @param type $imagePath
+ * @return type
  */
-function resizeAndSaveImage($width, $height){
-	checkImage();
-  /* Get original image x y*/
-  list($w, $h) = getimagesize($_FILES['file']['tmp_name']);
-  /* calculate new image size with ratio */
-  $ratio = max($width/$w, $height/$h);
-  $h = ceil($height / $ratio);
-  $x = ($w - $width / $ratio) / 2;
-  $w = ceil($width / $ratio);
-  /* new file name */
-  /* read binary data from image file */
-  $imgString = file_get_contents($_FILES['file']['tmp_name']);
-  /* create image from string */
-  $image = imagecreatefromstring($imgString);
-	saveImage($image);
-  $tmp = imagecreatetruecolor($width, $height);
-  $thumb = imagecopyresampled($tmp, $image,
-    0, 0,
-    $x, 0,
-    $width, $height,
-    $w, $h);
-  return $tmp;
+function make_thumb($imagePath) {
+		// Getting the image attributes
+		$size = getimagesize($imagePath);
+		$origHeight = $size[1];
+		$origWidth = $size[0];
+		if ($origHeight < $origWidth) {
+				$thumb_h = 100;
+				$thumb_w = ($origWidth / $origHeight) * $thumb_h;
+		} else {
+				$thumb_w = 100;
+				$thumb_h = ($origHeight / $origWidth) * $thumb_w;
+		}
 
-  /* cleanup memory */
+		// Checking image Type jpg , png etc
+		$type = $size[2];
 
+		if ($type == 2) {  // for jpeg formate // //resize the image//
+				$im = imagecreatefromjpeg($imagePath);
+				$newimage = imagecreatetruecolor($thumb_w, $thumb_h);
+				imagecopyresampled($newimage, $im, 0, 0, 0, 0, $thumb_w, $thumb_h, $origWidth, $origHeight);
 
-  imagedestroy($image);
-  imagedestroy($tmp);
+				ob_start();
+				imagejpeg($newimage);
+				$data = ob_get_clean();
+				ob_end_clean();
+				return base64_encode($data);
+		}
+		if ($type == 3) {  // for png formate // //resize the image//
+				$im = imagecreatefrompng($imagePath);
+				$newimage = imagecreatetruecolor($thumb_w, $thumb_h);
+				imagecopyresampled($newimage, $im, 0, 0, 0, 0, $thumb_w, $thumb_h, $origWidth, $origHeight);
+
+				ob_start();
+				imagepng($newimage);
+				$data = ob_get_clean();
+				ob_end_clean();
+				return base64_encode($data);
+		}
 }
 
-function saveImage($image){
-		  /* Save image */
-	$path = '../uploads/'.$_FILES['file']['name'];
-
-	switch ($_FILES['file']['type']) {
-		case 'image/jpeg':
-			imagejpeg($image, $path, 100);
-			break;
-		case 'image/png':
-			imagepng($image, $path, 0);
-			break;
-		case 'image/gif':
-			imagegif($image, $path);
-			break;
-		default:
-			exit;
-			break;
-	}
+function saveImage() {
+	if ($_FILES["file"]["error"] > 0)
+  {
+		addError("Error: " . $_FILES["file"]["error"]);
+  }
+else
+  {
+  move_uploaded_file($_FILES["file"]["tmp_name"],
+      "../uploads/" . $_FILES["file"]["name"]);
+  }
 }
 
-
-function checkImage() {
-// settings
-$max_file_size = 1024*200; // 200kb
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['file'])) {
-  if( $_FILES['file']['size'] > $max_file_size ){
-    addError('Please upload image smaller than 200KB');
-		redirect('pictureForm');
-      }
-}
-}
 
 
 ?>

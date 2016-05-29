@@ -9,7 +9,9 @@ foreach ($images as $image) {
   ?>
   <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-          <img src=<?="../".$image['image_path']?> alt="<?= $image["name"] ?>">
+          <a href=<?= "/php/index.php?id=showImage&image_path=". $image["image_path"]."&image_id=". $image["image_id"] ?> >
+          <?php echo "<img src=data:".$image['file_type'].";base64,".$image['thumbnail'] ." alt=".$image["name"] . " />"; ?>
+          </a>
           <a href=<?= "/php/index.php?id=deletePicture&image_id=".$image["image_id"] ?> class="btn btn-danger pull-right delete">delete</a>
       </div>
   </div>

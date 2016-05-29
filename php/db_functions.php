@@ -93,3 +93,14 @@ function insertImage($image, $thumb) {
             VALUES ('".$image['name']."','".$thumb."','uploads/".$_FILES['file']['name']."' , '".$_FILES['file']['type']."',".getSessionValue('benutzerId'). ",".$_GET['gallery_id']. ");";
     sqlQuery($sql);
 }
+
+function insertTag($name, $image_id) {
+    $sql = "INSERT INTO tag (name, image_id)
+            VALUES ('".$name."', ".$image_id.")";
+    sqlQuery($sql);
+}
+
+function getTags($image_id) {
+  $sql = "SELECT * FROM tag WHERE image_id = ".$image_id.";";
+  return sqlSelect($sql);
+}
