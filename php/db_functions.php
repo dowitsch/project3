@@ -74,8 +74,9 @@ function insertGallery($gallery) {
 }
 
 function updateGallery($gallery){
-   $sql = "UPDATE gallery SET name='', description=''
-            WHERE gallery_id=";
+   $sql = "UPDATE gallery SET name='".$gallery['name']."', description='".$gallery['description']."'
+            WHERE gallery_id=".$_GET['gallery_id'].";" ;
+  sqlQuery($sql);
 }
 
 /**

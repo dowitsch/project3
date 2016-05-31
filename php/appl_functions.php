@@ -76,7 +76,9 @@ function addTag(){
 }
 
 function galleryUpdate() {
-  $gallery = getUpdateGallery($_GET['gallery_id']);
+  if(!empty($_POST)) {
+    updateGallery($_POST);
+  }
   setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
   return runTemplate( "../templates/updateGalleryForm.htm.php" );
 }

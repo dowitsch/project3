@@ -6,7 +6,7 @@
                 <div class="panel-body">
                     <h5 class="text-center">
                         Update Gallery</h5>
-             	  	<form name="updateGalleryForm" action="<?php echo getValue('phpmodule'); ?>" method="post">
+             	  	<form name="updateGalleryForm" action="<?php "/php/index.php?id=galleryUpdate&gallery_id=".$_GET['gallery_id'] ?>" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>

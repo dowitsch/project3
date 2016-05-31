@@ -9,7 +9,7 @@
 // Akzeptierte Funktionen Login
 setValue('cfg_func_login', array("login","registration"));
 // Akzeptierte Funktionen Memberbereich
-setValue('cfg_func_member', array("fotoalben","logout", "galleryForm", "pictureForm", "showGallery", "deleteFotoalben", "deletePicture", "showImage", "addTag", "galleryUpdate"));
+setValue('cfg_func_member', array("fotoalben","logout", "galleryForm", "pictureForm", "showGallery", "deleteFotoalben", "deletePicture", "showImage", "addTag", "galleryUpdate", "updateGallery"));
 // Inhalt des Login-Menus
 setValue('cfg_menu_login', array("login"=>"Login","registration"=>"Registration"));
 // Inhalt des Menus im Memberbereich
