@@ -1,5 +1,4 @@
  <?php
- require('/home/fammann/programs/psysh');
 /*
  *  @autor Michael Abplanalp
  *  @version 1.0
