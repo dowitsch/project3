@@ -19,6 +19,6 @@ setValue('cfg_menu_login', array("login"=>"Login","registration"=>"Registration"
 
 
 
-$db = mysqli_connect("localhost", "test", "test123", "bilderdb");	// Zu Datenbankserver verbinden
+$db = mysqli_connect("localhost", "root", "gibbiX12345", "bilderdb");	// Zu Datenbankserver verbinden
 setValue('cfg_db', $db);
 ?>
