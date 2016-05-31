@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 -- Tabellenstruktur für Tabelle `gellery`
 --
 
-CREATE TABLE IF NOT EXISTS `gallery` (
+CREATE TABLE IF NOT EXISTS `tag` (
   tag_id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(50)  DEFAULT NULL,
   image_id int(11) NOT NULL,

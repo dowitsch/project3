@@ -74,4 +74,12 @@ function addTag(){
   insertTag($_POST['name'], $_GET['image_id']);
   redirect('fotoalben');
 }
+
+function galleryUpdate() {
+  $gallery = getUpdateGallery($_GET['gallery_id']);
+  setValue('phpmodule', $_SERVER['PHP_SELF']."?id=".__FUNCTION__);
+  return runTemplate( "../templates/updateGalleryForm.htm.php" );
+}
+
+
 ?>

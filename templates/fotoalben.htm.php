@@ -1,4 +1,4 @@
-<?php
+  <?php
 $galleries = getGalleries($_SESSION["benutzerId"]);
 ?>
 <div class="fotoalbum">
@@ -8,14 +8,22 @@ foreach ($galleries as $gallery) {
   ?>
   <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-          <a href=<?="/php/index.php?id=showGallery&gallery_id=".$gallery["gallery_id"]?> >
-              <img src="../images/foto-top.png" alt="<?= $gallery["name"] ?>">
+          <a href=<?="index.php?id=showGallery&gallery_id=".$gallery["gallery_id"]?> >
+              <?php
+              $images = getImages($gallery['gallery_id']);
+              if(!empty($images)){
+                $image = $images[0];
+                echo "<img src=data:".$image['file_type'].";base64,".$image['thumbnail'] ." alt=".$image["name"] . " />";
+              }else{
+                echo "No images found";
+              }
+              ?>
               <div class="caption">
                   <h3><?= $gallery["name"] ?></h3>
                   <?= $gallery["description"] ?>
               </div>
           </a>
-          <a href=<?= "/php/index.php?id=deleteFotoalben&gallery_id=".$gallery["gallery_id"] ?> class="btn btn-danger pull-right delete">delete</a>
+          <a href=<?= "index.php?id=deleteFotoalben&gallery_id=".$gallery["gallery_id"] ?> class="btn btn-danger pull-right delete">delete</a>
       </div>
   </div>
 </div>
